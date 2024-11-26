@@ -4,7 +4,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
-const MongoStore = require('connect-mongo'); // Import connect-mongo
+const flash = require('connect-flash');
+const MongoStore = require('connect-mongo'); // Import connect-mongo to store sessions in MongoDB
 const path = require('path');
 const app = express();
 
@@ -28,13 +29,27 @@ app.use(session({
   secret: process.env.SESSION_SECRET, // Use secret from environment variables
   resave: false,
   saveUninitialized: true,
-  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }) // Use connect-mongo to store sessions in MongoDB
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URI, // Using MongoDB to store sessions
+    collectionName: 'sessions' // Optional: specify collection for storing sessions
+  })
 }));
 
 // Passport Config and Middleware
 require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Flash middleware for showing messages
+app.use(flash());
+
+// Global variables for flash messages
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
+});
 
 // Import routes
 const indexRouter = require('./routes/index');
