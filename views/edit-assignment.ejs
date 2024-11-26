@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Edit Assignment</title>
+</head>
+<body>
+    <header>
+        <h2>Assignment Tracker</h2>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/assignments">Assignments</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Edit Assignment</h2>
+        <form action="/edit-assignment/<%= assignment._id %>" method="POST">
+            <label for="title">Assignment Title:</label>
+            <input type="text" id="title" name="title" value="<%= assignment.title %>" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4" required><%= assignment.description %></textarea>
+
+            <label for="dueDate">Due Date:</label>
+            <input type="date" id="dueDate" name="dueDate" value="<%= assignment.dueDate.toISOString().substr(0, 10) %>" required>
+
+            <button type="submit">Update Assignment</button>
+        </form>
+    </div>
+
+    <footer>
+        &copy; 2024 Assignment Tracker. All rights reserved.
+    </footer>
+</body>
+</html>

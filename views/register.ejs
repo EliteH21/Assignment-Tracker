@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Register - Assignment Tracker</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Assignment Tracker</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/register">Register</a></li>
+                    <li><a href="/login">Login</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main content section -->
+        <div class="content">
+            <div class="container">
+                <h2>Register</h2>
+                <form action="/register" method="POST">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username" required>
+
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" required>
+
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer section -->
+        <footer>
+            <p>&copy; 2024 Assignment Tracker. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
+
